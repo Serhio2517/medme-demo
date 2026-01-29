@@ -6,6 +6,7 @@ import Records from './pages/Records';
 import Booking from './pages/Booking';
 import AIAssistant from './pages/AIAssistant';
 import Profile from './pages/Profile';
+import CarePlan from './pages/CarePlan';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<AppLayout />}>
           <Route index element={<Home />} />
+          <Route path="care-plan" element={<CarePlan />} />
           <Route path="records" element={<Records />} />
           <Route path="booking" element={<Booking />} />
           <Route path="ai" element={<AIAssistant />} />
