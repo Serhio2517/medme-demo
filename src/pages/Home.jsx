@@ -30,7 +30,7 @@ const Home = () => {
                     textAlign: 'center'
                 }}
             >
-                <h2 className="text-headline" style={{ marginBottom: '16px' }}>Моё Здоровье</h2>
+                <h2 className="text-headline" style={{ marginBottom: '16px' }}>Моя Забота</h2>
 
                 <div style={{ position: 'relative', width: '200px', height: '200px', margin: '0 auto 16px' }}>
                     <svg width="200" height="200" style={{ transform: 'rotate(-90deg)' }}>
@@ -47,7 +47,7 @@ const Home = () => {
                     </svg>
                     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
                         <span style={{ fontSize: '48px', fontWeight: '800', color: 'var(--ios-green)' }}>87%</span>
-                        <span className="text-caption-1">Отличный результат</span>
+                        <span className="text-caption-1">Выполнено 6 из 7 рекомендаций</span>
                     </div>
                 </div>
 
