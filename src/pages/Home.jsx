@@ -24,28 +24,28 @@ const Home = () => {
                 style={{
                     background: 'var(--bg-card)',
                     borderRadius: 'var(--radius-lg)',
-                    padding: '24px',
+                    padding: '16px',
                     boxShadow: 'var(--shadow-md)',
                     marginBottom: '24px',
                 }}
             >
-                <h2 className="text-headline" style={{ marginBottom: '16px', textAlign: 'center' }}>Моя Забота</h2>
+                <h2 className="text-headline" style={{ marginBottom: '12px', textAlign: 'center' }}>Моя Забота</h2>
 
-                <div style={{ position: 'relative', width: '200px', height: '200px', margin: '0 auto 24px' }}>
-                    <svg width="200" height="200" style={{ transform: 'rotate(-90deg)' }}>
-                        <circle cx="100" cy="100" r="80" stroke="var(--ios-gray-5)" strokeWidth="16" fill="transparent" />
+                <div style={{ position: 'relative', width: '150px', height: '150px', margin: '0 auto 16px' }}>
+                    <svg width="150" height="150" style={{ transform: 'rotate(-90deg)' }}>
+                        <circle cx="75" cy="75" r="60" stroke="var(--ios-gray-5)" strokeWidth="12" fill="transparent" />
                         <circle
-                            cx="100" cy="100" r="80"
+                            cx="75" cy="75" r="60"
                             stroke="var(--ios-green)"
-                            strokeWidth="16"
+                            strokeWidth="12"
                             fill="transparent"
-                            strokeDasharray="502"
-                            strokeDashoffset="65" /* 87% filled */
+                            strokeDasharray="377"
+                            strokeDashoffset="49" /* 87% filled */
                             strokeLinecap="round"
                         />
                     </svg>
                     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
-                        <span style={{ fontSize: '56px', fontWeight: '800', color: 'var(--ios-green)' }}>87%</span>
+                        <span style={{ fontSize: '42px', fontWeight: '800', color: 'var(--ios-green)' }}>87%</span>
                     </div>
                 </div>
 
@@ -55,16 +55,27 @@ const Home = () => {
                     style={{
                         background: 'var(--ios-gray-6)',
                         borderRadius: 'var(--radius-md)',
-                        padding: '16px',
+                        padding: '12px 16px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         cursor: 'pointer'
                     }}
                 >
-                    <div>
-                        <span className="text-headline" style={{ fontSize: '15px', color: 'var(--text-primary)', display: 'block', marginBottom: '2px' }}>Выполнено 6 из 7</span>
-                        <span className="text-caption-1">Нажмите, чтобы увидеть список</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <div style={{
+                            width: '24px', height: '24px',
+                            borderRadius: '50%',
+                            background: 'var(--ios-orange)',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            boxShadow: '0 2px 4px rgba(255, 149, 0, 0.3)'
+                        }}>
+                            <span style={{ fontSize: '13px', fontWeight: 'bold', color: 'white' }}>3</span>
+                        </div>
+                        <div>
+                            <span className="text-headline" style={{ fontSize: '15px', color: 'var(--text-primary)', display: 'block' }}>К выполнению: 3</span>
+                            <span className="text-caption-1" style={{ color: 'var(--ios-orange)' }}>Требует внимания</span>
+                        </div>
                     </div>
                     <ChevronRight size={20} color="var(--ios-gray-2)" />
                 </motion.div>
