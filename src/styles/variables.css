@@ -1,0 +1,52 @@
+/* Переменные дизайн-системы (iOS Style) */
+:root {
+  /* Цвета (Light Mode) */
+  --ios-blue: #007AFF;
+  --ios-green: #34C759;
+  --ios-red: #FF3B30;
+  --ios-orange: #FF9500;
+  --ios-yellow: #FFCC00;
+  --ios-indigo: #5856D6;
+  --ios-teal: #5AC8FA;
+  --ios-pink: #FF2D55;
+  --ios-gray: #8E8E93;
+  --ios-gray-2: #AEAEB2;
+  --ios-gray-3: #C7C7CC;
+  --ios-gray-4: #D1D1D6;
+  --ios-gray-5: #E5E5EA;
+  --ios-gray-6: #F2F2F7;
+
+  /* Фон и текст */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F2F2F7; /* Фон приложения iOS */
+  --bg-card: #FFFFFF;
+  --text-primary: #000000;
+  --text-secondary: #3C3C4399; /* 60% opacity */
+  --text-tertiary: #3C3C434D; /* 30% opacity */
+
+  /* Размеры и отступы */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px; /* Стандарт для карточек */
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  /* Тени (мягкие, как в iOS) */
+  --shadow-sm: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0px 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0px 12px 24px rgba(0, 0, 0, 0.12);
+  
+  /* Эффекты */
+  --blur-md: blur(20px);
+}
+
+/* Dark Mode (заготовка) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #000000;
+    --bg-secondary: #1C1C1E;
+    --bg-card: #1C1C1E;
+    --text-primary: #FFFFFF;
+    --text-secondary: #EBEBF599;
+  }
+}

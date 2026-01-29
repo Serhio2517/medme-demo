@@ -1,0 +1,90 @@
+/* Глобальные стили */
+@import './variables.css';
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    /* Убирает подсветку клика на Android/iOS */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.5;
+    font-size: 16px;
+    overflow-x: hidden;
+    /* Плавный скролл */
+    -webkit-overflow-scrolling: touch;
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+/* Утилиты для текста */
+.text-large-title {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 0.37px;
+}
+
+.text-title-1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.36px;
+}
+
+.text-title-2 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.35px;
+}
+
+.text-title-3 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.38px;
+}
+
+.text-headline {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.41px;
+}
+
+.text-body {
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: -0.41px;
+}
+
+.text-caption-1 {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+/* Утилиты отступов */
+.p-4 {
+    padding: 16px;
+}
+
+.m-4 {
+    margin: 16px;
+}
+
+/* Скрытие скроллбара (для stories) */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
