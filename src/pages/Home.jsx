@@ -27,12 +27,11 @@ const Home = () => {
                     padding: '24px',
                     boxShadow: 'var(--shadow-md)',
                     marginBottom: '24px',
-                    textAlign: 'center'
                 }}
             >
-                <h2 className="text-headline" style={{ marginBottom: '16px' }}>Моя Забота</h2>
+                <h2 className="text-headline" style={{ marginBottom: '16px', textAlign: 'center' }}>Моя Забота</h2>
 
-                <div style={{ position: 'relative', width: '200px', height: '200px', margin: '0 auto 16px' }}>
+                <div style={{ position: 'relative', width: '200px', height: '200px', margin: '0 auto 24px' }}>
                     <svg width="200" height="200" style={{ transform: 'rotate(-90deg)' }}>
                         <circle cx="100" cy="100" r="80" stroke="var(--ios-gray-5)" strokeWidth="16" fill="transparent" />
                         <circle
@@ -46,23 +45,29 @@ const Home = () => {
                         />
                     </svg>
                     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
-                        <span style={{ fontSize: '48px', fontWeight: '800', color: 'var(--ios-green)' }}>87%</span>
-                        <span className="text-caption-1">Выполнено 6 из 7 рекомендаций</span>
+                        <span style={{ fontSize: '56px', fontWeight: '800', color: 'var(--ios-green)' }}>87%</span>
                     </div>
                 </div>
 
-                <button style={{
-                    background: 'var(--bg-secondary)',
-                    border: 'none',
-                    padding: '12px 24px',
-                    borderRadius: '20px',
-                    color: 'var(--ios-blue)',
-                    fontSize: '15px',
-                    fontWeight: '600',
-                    width: '100%'
-                }}>
-                    Как улучшить?
-                </button>
+                {/* Status & Action */}
+                <motion.div
+                    whileTap={{ scale: 0.98 }}
+                    style={{
+                        background: 'var(--ios-gray-6)',
+                        borderRadius: 'var(--radius-md)',
+                        padding: '16px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        cursor: 'pointer'
+                    }}
+                >
+                    <div>
+                        <span className="text-headline" style={{ fontSize: '15px', color: 'var(--text-primary)', display: 'block', marginBottom: '2px' }}>Выполнено 6 из 7</span>
+                        <span className="text-caption-1">Нажмите, чтобы увидеть список</span>
+                    </div>
+                    <ChevronRight size={20} color="var(--ios-gray-2)" />
+                </motion.div>
             </motion.div>
 
             {/* Reminders / Actions */}
