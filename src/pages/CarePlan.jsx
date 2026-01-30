@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronLeft, AlertCircle, Clock, CheckCircle2, Calendar } from 'lucide-react';
+import { ChevronLeft, AlertCircle, Clock, Calendar, CheckCircle2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const CarePlan = () => {
@@ -8,7 +8,7 @@ const CarePlan = () => {
 
     return (
         <div className="p-4" style={{ paddingTop: '20px', paddingBottom: '100px' }}>
-            {/* Header with Back Button */}
+            {/* Header */}
             <header style={{ marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <button
                     onClick={() => navigate('/')}
@@ -24,84 +24,62 @@ const CarePlan = () => {
                 <h1 className="text-title-2">План Заботы</h1>
             </header>
 
-            {/* Introduction Card */}
-            <div style={{
-                background: 'var(--bg-card)',
-                borderRadius: 'var(--radius-md)',
-                padding: '16px',
-                marginBottom: '24px',
-                boxShadow: 'var(--shadow-sm)'
-            }}>
-                <div style={{ display: 'flex', gap: '12px', alignItems: 'start' }}>
-                    <div style={{
-                        width: '40px', height: '40px',
-                        borderRadius: '50%',
-                        background: 'var(--ios-orange)',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        flexShrink: 0
-                    }}>
-                        <span style={{ fontWeight: 'bold', color: 'white', fontSize: '18px' }}>3</span>
-                    </div>
-                    <div>
-                        <h3 className="text-headline">Требует внимания</h3>
-                        <p className="text-caption-1" style={{ marginTop: '4px' }}>
-                            Это самые важные задачи на ближайшее время. Выполните их, чтобы повысить индекс заботы.
-                        </p>
-                    </div>
-                </div>
+            {/* Introduction */}
+            <div style={{ marginBottom: '32px' }}>
+                <h2 className="text-large-title" style={{ marginBottom: '8px' }}>Внимание</h2>
+                <p className="text-body" style={{ color: 'var(--text-secondary)' }}>
+                    Выполните просроченные задачи, чтобы вернуть индекс заботы в зеленую зону.
+                </p>
             </div>
 
-            {/* High Priority Section */}
-            <h3 className="text-headline" style={{ marginBottom: '12px', color: 'var(--ios-red)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <AlertCircle size={16} />
-                КРИТИЧНО
-            </h3>
+            {/* 1. OVERDUE (The only penalty) */}
+            <SectionHeader icon={<AlertCircle size={20} />} title="ПРОСРОЧЕНО" color="var(--ios-red)" />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '32px' }}>
                 <TaskItem
                     title="Общий анализ крови (ОАК)"
                     subtitle="Ежегодный чекап"
-                    date="Просрочено на 5 дней"
-                    priority="critical"
+                    date="Просрочено 5 дней"
+                    status="overdue"
+                    actionLabel="Сдать сейчас"
+                />
+                <TaskItem
+                    title="Запись к Стоматологу"
+                    subtitle="Гигиена 1 раз в 6 месяцев"
+                    date="Просрочено 2 дня"
+                    status="overdue"
+                    actionLabel="Записаться"
                 />
             </div>
 
-            {/* Medium Priority Section */}
-            <h3 className="text-headline" style={{ marginBottom: '12px', color: 'var(--ios-orange)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Clock size={16} />
-                СКОРО (Февраль)
-            </h3>
+            {/* 2. CURRENT (The active quests) */}
+            <SectionHeader icon={<Clock size={20} />} title="АКТУАЛЬНО (Январь)" color="var(--ios-orange)" />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '32px' }}>
-                <TaskItem
-                    title="Осмотр у Офтальмолога"
-                    subtitle="Контроль зрения"
-                    date="До 15 Февраля"
-                    priority="high"
-                />
                 <TaskItem
                     title="Витамин D (Анализ)"
                     subtitle="Контроль дефицитов"
-                    date="До 20 Февраля"
-                    priority="high"
+                    date="До 31 Января"
+                    status="urgent"
+                    actionLabel="Записаться"
                 />
             </div>
 
-            {/* Routine Section */}
-            <h3 className="text-headline" style={{ marginBottom: '12px', color: 'var(--ios-blue)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Calendar size={16} />
-                ПЛАНОВО (2026)
-            </h3>
+            {/* 3. FUTURE (The Safe Zone) */}
+            <SectionHeader icon={<Calendar size={20} />} title="ПЛАН (Будущее)" color="var(--ios-gray)" />
+            <p className="text-caption-1" style={{ marginBottom: '12px', color: 'var(--text-secondary)' }}>
+                Новые назначения попадают сюда и не влияют на рейтинг, пока не наступит их срок.
+            </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <TaskItem
                     title="УЗИ Брюшной полости"
-                    subtitle="Профилактика"
+                    subtitle="По назначению врача"
                     date="Март 2026"
-                    priority="low"
+                    status="future"
                 />
                 <TaskItem
-                    title="Стоматолог (Гигиена)"
-                    subtitle="Каждые 6 месяцев"
+                    title="Осмотр у Офтальмолога"
+                    subtitle="Ежегодный контроль"
                     date="Июнь 2026"
-                    priority="low"
+                    status="future"
                 />
             </div>
 
@@ -109,45 +87,59 @@ const CarePlan = () => {
     );
 };
 
-const TaskItem = ({ title, subtitle, date, priority }) => {
-    let borderColor = 'transparent';
-    let icon = null;
-    let textColor = 'var(--text-secondary)';
+const SectionHeader = ({ icon, title, color }) => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', color: color }}>
+        {icon}
+        <span className="text-headline" style={{ fontSize: '15px', letterSpacing: '0.5px' }}>{title}</span>
+    </div>
+);
 
-    if (priority === 'critical') {
+const TaskItem = ({ title, subtitle, date, status, actionLabel }) => {
+    let borderColor = 'transparent';
+    let bgColor = 'var(--bg-card)';
+    let dateColor = 'var(--text-secondary)';
+    let titleColor = 'var(--text-primary)';
+
+    if (status === 'overdue') {
         borderColor = 'var(--ios-red)';
-        icon = <AlertCircle size={20} color="var(--ios-red)" />;
-        textColor = 'var(--ios-red)';
-    } else if (priority === 'high') {
+        dateColor = 'var(--ios-red)';
+        bgColor = '#FFF5F5'; // Light red tint
+    } else if (status === 'urgent') {
         borderColor = 'var(--ios-orange)';
-        icon = <div style={{ width: 12, height: 12, borderRadius: '50%', border: '2px solid var(--ios-orange)' }} />;
-        textColor = 'var(--ios-orange)';
-    } else {
-        borderColor = 'var(--ios-blue)'; // Low priority accent
-        icon = <div style={{ width: 12, height: 12, borderRadius: '50%', border: '2px solid var(--ios-gray-4)' }} />;
+        dateColor = 'var(--ios-orange)';
+    } else if (status === 'future') {
+        borderColor = 'transparent';
+        dateColor = 'var(--ios-gray)';
+        titleColor = 'var(--ios-gray)'; // Muted title for future
     }
 
     return (
         <motion.div
             whileTap={{ scale: 0.98 }}
             style={{
-                background: 'var(--bg-card)',
+                background: bgColor,
                 padding: '16px',
                 borderRadius: 'var(--radius-md)',
                 boxShadow: 'var(--shadow-sm)',
+                borderLeft: `4px solid ${borderColor}`,
                 display: 'flex',
-                alignItems: 'center',
-                gap: '16px',
-                borderLeft: `4px solid ${borderColor}`
+                flexDirection: 'column',
+                gap: '12px'
             }}
         >
-            <div style={{ flex: 1 }}>
-                <h4 className="text-headline" style={{ marginBottom: '2px' }}>{title}</h4>
-                <p className="text-caption-1" style={{ fontSize: '13px' }}>{subtitle}</p>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
+                <div>
+                    <h4 className="text-headline" style={{ marginBottom: '2px', color: titleColor }}>{title}</h4>
+                    <p className="text-caption-1" style={{ fontSize: '13px' }}>{subtitle}</p>
+                </div>
+                <span className="text-caption-1" style={{ color: dateColor, fontWeight: '600', fontSize: '12px', whiteSpace: 'nowrap' }}>{date}</span>
             </div>
-            <div style={{ textAlign: 'right' }}>
-                <span className="text-caption-1" style={{ color: textColor, fontWeight: '500' }}>{date}</span>
-            </div>
+
+            {actionLabel && (
+                <div style={{ borderTop: '1px solid rgba(0,0,0,0.05)', paddingTop: '12px', marginTop: '4px' }}>
+                    <span style={{ color: 'var(--ios-blue)', fontWeight: '600', fontSize: '14px' }}>{actionLabel}</span>
+                </div>
+            )}
         </motion.div>
     );
 }
