@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Bell, Calendar as CalendarIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="p-4" style={{ paddingTop: '20px' }}>
             {/* Header */}
@@ -52,7 +55,7 @@ const Home = () => {
                 {/* Status & Action */}
                 <motion.div
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => window.location.hash = '#/care-plan'}
+                    onClick={() => navigate('/care-plan')}
                     style={{
                         background: 'var(--ios-gray-6)',
                         borderRadius: 'var(--radius-md)',
