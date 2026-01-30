@@ -1,114 +1,137 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronRight, Bell, Calendar as CalendarIcon } from 'lucide-react';
+import { ChevronRight, Bell, Calendar as CalendarIcon, FlaskConical, Stethoscope, Award, AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const navigate = useNavigate();
 
+    // Demo state: change this to simulate different statuses
+    const overdueCount = 2;
+    const currentCount = 1;
+
+    // Calculate status
+    let statusBadge = { icon: '🏆', title: 'Мастер заботы', subtitle: 'Нет просроченных задач', color: 'var(--ios-green)', bg: '#E8F5E9' };
+    if (overdueCount > 0) {
+        statusBadge = { icon: '🔔', title: 'Требует внимания', subtitle: `${overdueCount} просроченных задач`, color: 'var(--ios-red)', bg: '#FFEBEE' };
+    } else if (currentCount > 0) {
+        statusBadge = { icon: '⚡', title: 'На связи', subtitle: `${currentCount} задач на этот месяц`, color: 'var(--ios-orange)', bg: '#FFF3E0' };
+    }
+
     return (
         <div className="p-4" style={{ paddingTop: '20px' }}>
-            {/* Header */}
+            {/* Header with Dynamic Status */}
             <header style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
-                    <h1 className="text-large-title">Сегодня</h1>
-                    <p className="text-body" style={{ color: 'var(--ios-gray)' }}>Среда, 29 января</p>
+                    <p className="text-caption-1" style={{ color: 'var(--ios-gray)', marginBottom: '4px' }}>Четверг, 30 января</p>
+                    <h1 className="text-large-title" style={{ color: statusBadge.color }}>{statusBadge.title}</h1>
                 </div>
-                <div style={{ width: 40, height: 40, borderRadius: '50%', overflow: 'hidden', background: '#eee' }}>
+                <div style={{ width: 44, height: 44, borderRadius: '50%', overflow: 'hidden', background: '#eee', border: '2px solid var(--ios-gray-5)' }}>
                     <img src="https://i.pravatar.cc/150?img=68" alt="Profile" style={{ width: '100%', height: '100%' }} />
                 </div>
             </header>
 
-            {/* Health Ring Widget */}
+            {/* Status Badge Card */}
             <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
+                initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.4 }}
+                onClick={() => navigate('/care-plan')}
                 style={{
-                    background: 'var(--bg-card)',
+                    background: statusBadge.bg,
                     borderRadius: 'var(--radius-lg)',
-                    padding: '16px',
-                    boxShadow: 'var(--shadow-md)',
+                    padding: '20px',
                     marginBottom: '24px',
+                    cursor: 'pointer',
+                    border: `1px solid ${statusBadge.color}22`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '16px'
                 }}
             >
-                <h2 className="text-headline" style={{ marginBottom: '12px', textAlign: 'center' }}>Моя Забота</h2>
-
-                <div style={{ position: 'relative', width: '150px', height: '150px', margin: '0 auto 16px' }}>
-                    <svg width="150" height="150" style={{ transform: 'rotate(-90deg)' }}>
-                        <circle cx="75" cy="75" r="60" stroke="var(--ios-gray-5)" strokeWidth="12" fill="transparent" />
-                        <circle
-                            cx="75" cy="75" r="60"
-                            stroke="var(--ios-green)"
-                            strokeWidth="12"
-                            fill="transparent"
-                            strokeDasharray="377"
-                            strokeDashoffset="49" /* 87% filled */
-                            strokeLinecap="round"
-                        />
-                    </svg>
-                    <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
-                        <span style={{ fontSize: '42px', fontWeight: '800', color: 'var(--ios-green)' }}>87%</span>
-                    </div>
+                <div style={{ fontSize: '48px' }}>{statusBadge.icon}</div>
+                <div style={{ flex: 1 }}>
+                    <h2 className="text-title-2" style={{ marginBottom: '4px', color: statusBadge.color }}>{statusBadge.title}</h2>
+                    <p className="text-body" style={{ color: 'var(--text-secondary)' }}>{statusBadge.subtitle}</p>
                 </div>
-
-                {/* Status & Action */}
-                <motion.div
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => navigate('/care-plan')}
-                    style={{
-                        background: 'var(--ios-gray-6)',
-                        borderRadius: 'var(--radius-md)',
-                        padding: '12px 16px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        cursor: 'pointer'
-                    }}
-                >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <div style={{
-                            width: '24px', height: '24px',
-                            borderRadius: '50%',
-                            background: 'var(--ios-orange)',
-                            display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            boxShadow: '0 2px 4px rgba(255, 149, 0, 0.3)'
-                        }}>
-                            <span style={{ fontSize: '13px', fontWeight: 'bold', color: 'white' }}>3</span>
-                        </div>
-                        <div>
-                            <span className="text-headline" style={{ fontSize: '15px', color: 'var(--text-primary)', display: 'block' }}>К выполнению: 3</span>
-                            <span className="text-caption-1" style={{ color: 'var(--ios-orange)' }}>Требует внимания</span>
-                        </div>
-                    </div>
-                    <ChevronRight size={20} color="var(--ios-gray-2)" />
-                </motion.div>
+                <ChevronRight size={24} color={statusBadge.color} />
             </motion.div>
 
-            {/* Reminders / Actions */}
-            <h3 className="text-title-2" style={{ marginBottom: '16px' }}>Напоминания</h3>
+            {/* Category Cards */}
+            <h3 className="text-headline" style={{ marginBottom: '12px', color: 'var(--text-secondary)' }}>Категории</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '24px' }}>
+                <CategoryCard
+                    icon={<FlaskConical size={24} color="var(--ios-blue)" />}
+                    title="Обследования"
+                    status="2 выполнено"
+                    statusColor="var(--ios-green)"
+                    detail="Следующее: УЗИ в Марте"
+                />
+                <CategoryCard
+                    icon={<Stethoscope size={24} color="var(--ios-purple)" />}
+                    title="Приёмы врачей"
+                    status="1 запланирован"
+                    statusColor="var(--ios-orange)"
+                    detail="Стоматолог — до 5 Февраля"
+                    hasWarning
+                />
+            </div>
 
+            {/* Today's Reminders */}
+            <h3 className="text-headline" style={{ marginBottom: '12px', color: 'var(--text-secondary)' }}>Сегодня</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <ActionCard
+                <ReminderCard
                     icon={<Bell size={24} color="var(--ios-red)" />}
                     title="Принять Витамин D"
                     subtitle="После еды, 2000 МЕ"
                     time="14:00"
-                    isDone={false}
                 />
-                <ActionCard
+                <ReminderCard
                     icon={<CalendarIcon size={24} color="var(--ios-blue)" />}
                     title="Запись к стоматологу"
                     subtitle="МЦ 'Лодэ', Доктор Иванова"
                     time="Завтра, 10:00"
-                    isDone={false}
                 />
             </div>
         </div>
     );
 };
 
-const ActionCard = ({ icon, title, subtitle, time, isDone }) => (
+const CategoryCard = ({ icon, title, status, statusColor, detail, hasWarning }) => (
+    <motion.div
+        whileTap={{ scale: 0.98 }}
+        style={{
+            background: 'var(--bg-card)',
+            padding: '16px',
+            borderRadius: 'var(--radius-md)',
+            boxShadow: 'var(--shadow-sm)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '16px'
+        }}
+    >
+        <div style={{
+            width: '48px', height: '48px',
+            borderRadius: '12px',
+            background: 'var(--ios-gray-6)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center'
+        }}>
+            {icon}
+        </div>
+        <div style={{ flex: 1 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2px' }}>
+                <h4 className="text-headline">{title}</h4>
+                {hasWarning && <AlertCircle size={16} color="var(--ios-orange)" />}
+            </div>
+            <p className="text-caption-1" style={{ color: 'var(--text-secondary)' }}>{detail}</p>
+        </div>
+        <div style={{ textAlign: 'right' }}>
+            <span className="text-caption-1" style={{ color: statusColor, fontWeight: '600' }}>{status}</span>
+        </div>
+    </motion.div>
+);
+
+const ReminderCard = ({ icon, title, subtitle, time }) => (
     <motion.div
         whileTap={{ scale: 0.98 }}
         style={{
